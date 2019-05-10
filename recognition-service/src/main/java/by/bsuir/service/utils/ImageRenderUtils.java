@@ -11,6 +11,7 @@ import java.util.List;
 public class ImageRenderUtils {
 
     public static int[][] getBW(BufferedImage image) {
+        image = toBlackWhite(image);
         int height = image.getHeight();
         int width = image.getWidth();
         int[][] bwImage = new int[height][width];
@@ -22,6 +23,18 @@ public class ImageRenderUtils {
             }
         }
         return bwImage;
+    }
+
+    public static BufferedImage toBlackWhite(BufferedImage image){
+        BufferedImage result = new BufferedImage(
+                image.getWidth(),
+                image.getHeight(),
+                BufferedImage.TYPE_BYTE_BINARY);
+
+        Graphics2D graphic = result.createGraphics();
+        graphic.drawImage(image, 0, 0, Color.WHITE, null);
+        graphic.dispose();
+        return result;
     }
 
     public static BufferedImage scaleImage(int[][] image, int width, int height) {

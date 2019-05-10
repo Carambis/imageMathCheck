@@ -30,11 +30,10 @@ public class SymbolWeightServiceImpl implements SymbolWeightService {
 
     @Override
     public void train() throws IOException {
+
         int width = Integer.valueOf(environment.getProperty(EnvironmentConst.COMMON_WIDTH));
         int height = Integer.valueOf(environment.getProperty(EnvironmentConst.COMMON_HEIGHT));
         String path = environment.getProperty("image.common.path");
-        System.out.println("Start learning " + width);
-        List<SymbolWeight> weightList = new ArrayList<>();
         List<ImageSymbols> listImage = new ArrayList<>();
         listImage.add(new ImageSymbols(ImageRenderUtils.readImage(path + "-.bmp", width, height), "-"));
         listImage.add(new ImageSymbols(ImageRenderUtils.readImage(path + "+.bmp", width, height), "+"));
@@ -45,9 +44,11 @@ public class SymbolWeightServiceImpl implements SymbolWeightService {
         listImage.add(new ImageSymbols(ImageRenderUtils.readImage(path + "x.bmp", width, height), "x"));
         listImage.add(new ImageSymbols(ImageRenderUtils.readImage(path + "y.bmp", width, height), "y"));
         listImage.add(new ImageSymbols(ImageRenderUtils.readImage(path + "z.bmp", width, height), "z"));
-//
 
         String[] symbols = new String[]{"-", "+", "2", "a", "b", "c", "x", "y", "z"};
+
+        System.out.println("Start learning " + width);
+        List<SymbolWeight> weightList = new ArrayList<>();
         for (String symbol : symbols) {
             int[] weights = new int[width * height];
             for (int i = 0; i < 2000; i++) {
