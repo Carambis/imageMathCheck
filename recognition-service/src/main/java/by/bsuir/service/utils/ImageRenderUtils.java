@@ -11,7 +11,7 @@ import java.util.List;
 public class ImageRenderUtils {
 
     public static int[][] getBW(BufferedImage image) {
-        image = toBlackWhite(image);
+//        image = toBlackWhite(image);
         int height = image.getHeight();
         int width = image.getWidth();
         int[][] bwImage = new int[height][width];
